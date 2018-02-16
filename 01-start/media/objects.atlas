@@ -1,0 +1,70 @@
+{
+    "frames": { 
+        "banana.png": {
+            "x": 131, 
+            "y": 1,
+            "w": 128,
+            "h": 128,
+            "sx": 0,
+            "sy": 0,
+            "sw": 127,
+            "sh": 128,
+            "ax": 0,
+            "ay": 0 
+        }, 
+        "cherries.png": {
+            "x": 260, 
+            "y": 1,
+            "w": 128,
+            "h": 128,
+            "sx": 5,
+            "sy": 3,
+            "sw": 120,
+            "sh": 125,
+            "ax": 0,
+            "ay": 0 
+        }, 
+        "crate.png": {
+            "x": 130, 
+            "y": 131,
+            "w": 128,
+            "h": 128,
+            "sx": 3,
+            "sy": 7,
+            "sw": 123,
+            "sh": 121,
+            "ax": 0,
+            "ay": 0 
+        }, 
+        "floor.png": {
+            "x": 1, 
+            "y": 1,
+            "w": 128,
+            "h": 128,
+            "sx": 0,
+            "sy": 0,
+            "sw": 128,
+            "sh": 128,
+            "ax": 0,
+            "ay": 0 
+        }, 
+        "orange.png": {
+            "x": 1, 
+            "y": 131,
+            "w": 128,
+            "h": 128,
+            "sx": 1,
+            "sy": 5,
+            "sw": 127,
+            "sh": 123,
+            "ax": 0,
+            "ay": 0 
+        }
+    },
+    "meta": {
+        "app": "https://www.codeandweb.com/texturepacker",
+        "exporter": "panda",
+        "image": "objects.png",
+        "smartupdate": "$TexturePacker:SmartUpdate:39ab8079b4381a7621bdbb66bcc0fa70:82458e229cb462c2b8c4c5d2685d1fb9:feb5d1df74648e572d388d63510c6eb1$"
+    }
+}

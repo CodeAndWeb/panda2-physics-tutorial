@@ -13685,10 +13685,10 @@ copyClass('Body', p2.Body, null, {
         world.addBody(this);
     },
 
-    getShape: function(shapeName) {
+    forEachShape: function(shapeName, callback) {
         for (var i = 0; i < this.shapes.length; i++) {
             var shape = this.shapes[i];
-            if (shape.name === shapeName) return shape;
+            if (shape.name === shapeName) callback(shape);
         }
     },
 
@@ -13718,7 +13718,6 @@ game.Body.fromData = function(data, name, props) {
     };
     game.merge(bodyProps, props);
     var body = new game.Body(bodyProps);
-    body.anchor = new game.Vector(bodyData.body.ax, bodyData.body.ay);
     
     var cm = p2.vec2.create();
 
@@ -13747,8 +13746,8 @@ game.Body.fromData = function(data, name, props) {
                 }
 
                 p2.vec2.scale(cm, shape.centerOfMass, 1);
-                cm[0] -= bodyData.body.ax / world.ratio;
-                cm[1] -= bodyData.body.ay / world.ratio;
+                cm[0] -= (bodyData.body.size[0] / 2) / world.ratio;
+                cm[1] -= (bodyData.body.size[1] / 2) / world.ratio;
 
                 shape.sensor = shapeData.sensor;
                 shape.collisionGroup = shapeData.collisionGroup;
@@ -13771,8 +13770,8 @@ game.Body.fromData = function(data, name, props) {
 
             body.addShape(shape);
 
-            shape.position[0] = (-bodyData.body.ax / world.ratio) + shapeData.center[0] / world.ratio;
-            shape.position[1] = (-bodyData.body.ay / world.ratio) + shapeData.center[1] / world.ratio;
+            shape.position[0] = (-(bodyData.body.size[0] / 2) / world.ratio) + shapeData.center[0] / world.ratio;
+            shape.position[1] = (-(bodyData.body.size[1] / 2) / world.ratio) + shapeData.center[1] / world.ratio;
         }
     }
 
@@ -13796,7 +13795,7 @@ game.PhysicsSprite.inject({
             var data = props.data;
             delete props.data;
             props.world = world;
-            var name = texture.substr(0, texture.indexOf('.'));
+            var name = props.name || data.substr(0, data.indexOf('.'));
             this.body = game.Body.fromData(data, name, props);
             this.body.position[0] = x / world.ratio;
             this.body.position[1] = y / world.ratio;
@@ -13830,8 +13829,9 @@ game.PhysicsSprite.inject({
     },
 
     update: function() {
-        this.x = this.body.position[0] * game.scene.world.ratio;
-        this.y = this.body.position[1] * game.scene.world.ratio;
+        if (!this.body.world) return;
+        this.x = this.body.position[0] * this.body.world.ratio;
+        this.y = this.body.position[1] * this.body.world.ratio;
         this.rotation = this.body.angle;
     }
 });
